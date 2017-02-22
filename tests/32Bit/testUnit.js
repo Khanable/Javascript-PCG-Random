@@ -272,6 +272,7 @@ tests.push(new Test('UInt greaterOrEqual', function(assert) {
 	assert.ok(uint1.greaterOrEqual(uint2));
 }));
 
+
 /*******************************************************************************
  * Random.UInt
  * Profiling
@@ -481,10 +482,10 @@ envTemp.numTimes = function() { return 100; }
 profiler.addProfile(new Profile.Profile('UInt equal', envTemp));
 
 /*******************************************************************************
- * Random.RandomFactory
+ * Random.RandomFactory32
  * Tests
 *******************************************************************************/
-tests.push(new Test('RandomFactory Constructor', function(assert) {
+tests.push(new Test('RandomFactory32 Constructor', function(assert) {
 	var random = new Random.RandomFactory32(42, 54);
 
 	var data = {};
@@ -500,6 +501,20 @@ tests.push(new Test('RandomFactory Constructor', function(assert) {
 	assert.ok(random._inc.data.every(test, data));
 }));
 
+
+tests.push(new Test('RandomFactory32 nextFloat', function(assert) {
+	var random = new Random.RandomFactory32(42, 54);
+
+	assert.ok(random.nextFloat() == 0.6303102204110473);
+	assert.ok(random.nextFloat() == 0.4815666696522385);
+}));
+
+tests.push(new Test('RandomFactory32 nextFloatRange', function(assert) {
+	var random = new Random.RandomFactory32(42, 54);
+
+	assert.ok(random.nextFloatRange(2, 5) == 3.890930661233142);
+	assert.ok(random.nextFloatRange(2, 5) == 3.4447000089567155);
+}));
 /*******************************************************************************
  * Tests Run
 *******************************************************************************/

@@ -2,7 +2,7 @@
 - Need license if release
 http://www.pcg-random.org/
 http://www.pcg-random.org/using-pcg-c-basic.html
-http://man7.org/linux/man-pages/man3/ldexp.3.html
+http://mumble.net/~campbell/tmp/random_real.c
 
 = Refactoring
 - convert all _internal UInt functions to take array data and operate on it

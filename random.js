@@ -374,7 +374,7 @@ Object.defineProperty(Random.UInt.prototype, '_mod', {value:
 });
 Object.seal(Random.UInt.prototype._mod);
 
-Object.defineProperty(Random.UInt.prototype, '_mul', {enumerable: true, value:
+Object.defineProperty(Random.UInt.prototype, '_mul', {value:
 function(data1, data2) {
 	var matchSize = this._matchSize(data1, data2);
 	var src1 = matchSize.src1;
@@ -453,7 +453,7 @@ Object.defineProperty(Random.UInt.prototype, 'div', {enumerable: true, value:
 });
 Object.seal(Random.UInt.prototype.div);
 
-Object.defineProperty(Random.UInt.prototype, 'mod', {value:
+Object.defineProperty(Random.UInt.prototype, 'mod', {enumerable: true, value:
 	function(uint) {
 		return new Random.UInt(this._mod(this.data, uint.data));
 	}
@@ -653,17 +653,22 @@ function() {
 }});
 Object.seal(Random.RandomFactoryBase.nextFloat);
 
+Object.defineProperty(Random.RandomFactoryBase, 'nextFloatRange', {writable: true, enumerable: true, value:
+function(start, end) {
+		console.log('nextFloatRange not implemented');
+}});
+Object.seal(Random.RandomFactoryBase.nextFloatRange);
+
 
 Object.seal(Random.RandomFactoryBase);
 
 /*******************************************************************************
  * Random.RandomFactory32 Class
  * initState and initSeq should not be a number over 2 to the power 53
- * stateBitSize and seqBitSize can be larger then this power.
  * https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER
 *******************************************************************************/
 Object.defineProperty(Random, 'RandomFactory32', {enumerable: true, value: 
-function(initState, initSeq, bitSize) {
+function(initState, initSeq) {
 	Object.defineProperty(this, '_state', {value: null, writable: true});
 	Object.defineProperty(this, '_inc', {value: null, writable: true});
 	var intSize = 64;
@@ -738,13 +743,25 @@ Object.defineProperty(Random.RandomFactory32.prototype, 'nextInt', {enumerable: 
 });
 Object.seal(Random.RandomFactory32.prototype.nextInt);
 
+//Can't really make this a function of RandomFactoryBase as javascripts number
+//implementation can only represent 2 to the power 53/-53 numbers
+//Will have to do something clever for 64bit (or just accept) and higher. 
 Object.defineProperty(Random.RandomFactory32.prototype, 'nextFloat', {enumerable: true, writable: false, value:
 	function() {
-		return 1;
+		//From Generating Doubles
+		//http://www.pcg-random.org/using-pcg-c-basic.html
+		return this.nextInt()*Math.pow(2, -32);
 	}
 });
 Object.seal(Random.RandomFactory32.prototype.nextFloat);
 
+//Note nextFloat note
+Object.defineProperty(Random.RandomFactory32.prototype, 'nextFloatRange', {enumerable: true, writable: false, value:
+	function(start, end) {
+		return start+this.nextFloat()*(end-start);
+	}
+});
+Object.seal(Random.RandomFactory32.prototype.nextFloatRange);
 
 Object.seal(Random.RandomFactory32.prototype);
 /*******************************************************************************
