@@ -1,3 +1,6 @@
+= License
+- Need license if release
+
 = Refactoring
 - convert all _internal UInt functions to take array data and operate on it
 - Error/Exceptions where approperiate. one in div
