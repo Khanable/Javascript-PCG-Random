@@ -647,16 +647,11 @@ Object.defineProperty(Random.RandomFactoryBase, 'nextIntRange', {writable: true,
 });
 Object.seal(Random.RandomFactoryBase.nextIntRange);
 
-Object.defineProperty(Random.RandomFactoryBase, 'nextFloat', {enumerable: true, value:
+Object.defineProperty(Random.RandomFactoryBase, 'nextFloat', {writable: true, enumerable: true, value:
 function() {
+		console.log('nextFloat not implemented');
 }});
 Object.seal(Random.RandomFactoryBase.nextFloat);
-
-Object.defineProperty(Random.RandomFactoryBase, 'nextPoint', {enumerable: true, value:
-function() {
-	return new Phaser.Point(this.nextFloat(), this.nextFloat());
-}});
-Object.seal(Random.RandomFactoryBase.nextPoint);
 
 
 Object.seal(Random.RandomFactoryBase);
@@ -742,6 +737,14 @@ Object.defineProperty(Random.RandomFactory32.prototype, 'nextInt', {enumerable: 
 	}
 });
 Object.seal(Random.RandomFactory32.prototype.nextInt);
+
+Object.defineProperty(Random.RandomFactory32.prototype, 'nextFloat', {enumerable: true, writable: false, value:
+	function() {
+		return 1;
+	}
+});
+Object.seal(Random.RandomFactory32.prototype.nextFloat);
+
 
 Object.seal(Random.RandomFactory32.prototype);
 /*******************************************************************************
