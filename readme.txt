@@ -13,3 +13,5 @@ http://mumble.net/~campbell/tmp/random_real.c
 = Upgrades
 - Implmenet ArrayBuffer instead of Array for uint representation
 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Typed_arrays
+- Iterators and generators exist, can remove slices() and replace with the arrays 'return new iterator'
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/prototype

@@ -11,7 +11,7 @@ const Random = {};
  * or return the correct representation on converting to uint (Resolution will be lost).
  * https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER
 *******************************************************************************/
-Object.defineProperty(Random, 'UInt', {enumerable: false, value:
+Object.defineProperty(Random, 'UInt', {value:
 function(data, isLength) {
 	Object.defineProperty(this, '_data', {writable: true, value: null});
 	Object.defineProperty(this, '_maxValue', {writable: true, value: null });
@@ -561,7 +561,7 @@ Object.seal(Random.UInt.prototype);
 /*******************************************************************************
  * Random.RandomFactoryBase
 *******************************************************************************/
-Object.defineProperty(Random, 'RandomFactoryBase', {enumerable: true, value: {}});
+Object.defineProperty(Random, 'RandomFactoryBase', {value: {}});
 
 Object.defineProperty(Random.RandomFactoryBase, '_UInt', {value: Random.UInt });
 //Converted magic64 of 6364136223846793005 to binary bits as the maximum safe value javascript can support is 9007199254740991
